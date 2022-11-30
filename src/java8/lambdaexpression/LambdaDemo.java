@@ -13,6 +13,8 @@ public class LambdaDemo {
         System.out.println("Post Java 8");
         BiConsumer<Integer, Integer> biConsumer = (a, b) -> System.out.println(a + b);
         biConsumer.accept(4, 6);
+
+
     }
 
     public void add(int a, int b) {
