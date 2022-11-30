@@ -14,7 +14,12 @@ import java.util.function.Consumer;
  *      ->right: lambda body (overriding abstract method)
  *
  * 3. How to use (6 formats)
+ *      ->left: lambda parameter list - type could be omitted; only one parameter, then () is omitted as well;
+ *      ->right: lambda body - { }, but if only one statement(or one return statement) inside {}, then {} (and return)
+ *              could be omitted.
  *
+ *  4. lambda is an instance of an interface
+ *          The interface has only one method - functional interface.
  */
 public class LambdaTest1 {
     //Format 1:  no parameter, no return
@@ -97,5 +102,8 @@ public class LambdaTest1 {
     public void test6(){
         Comparator<Integer> com2 = (o1, o2) -> o1.compareTo(o2);
         System.out.println(com2.compare(23, 56));
+
+        Consumer<String> con1 = s -> System.out.println(s);
+        con1.accept("I love Java");
     }
 }
