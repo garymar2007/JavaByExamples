@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-class CrashMinimizer {
+public class CrashMinimizer {
     public static final String ONE_LINE_FILE = "oneLineFile.txt";
     public static final String ONE_CHAR_FILE = "oneCharFile.txt";
     /**

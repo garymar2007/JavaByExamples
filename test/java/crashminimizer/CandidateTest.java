@@ -1,7 +1,9 @@
-package crashminimizer;
+package java.crashminimizer;
 
 import java.io.*;
 import java.nio.file.*;
+
+import main.java.crashminimizer.CrashMinimizer;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -18,7 +20,7 @@ public class CandidateTest {
 
         /* We can compile once in the first test--the binary
          * will persist for the remainder of the test suite */
-        TestUtilities.runCommand("javac " + programNameUnderTest + ".java");
+        //TestUtilities.runCommand("javac " + programNameUnderTest + ".java");
 
         String actual = CrashMinimizer.minimize(
                 "java " + programNameUnderTest, failingInputFilename
