@@ -37,23 +37,95 @@ public class JavaStream {
         //7. Stream from list, filter and print
         List<String> people = Arrays.asList("AL", "Ankit", "Brent", "Sarika", "amanda", "Hans", "Shivika", "Sara", "Gary", "Venky", "Craig", "Greg");
         people.stream().map(String::toLowerCase).filter(x -> x.startsWith("a")).forEach(System.out::println);
+        System.out.println();
 
         //8. Stream rows from text file, sort, filter, and print
         try{
-            Stream<String> lines = Files.lines(Paths.get("bands.txt"));
+            Stream<String> lines = Files.lines(Paths.get("C:\\workspaces\\JavaByExamples\\src\\streams\\bands.txt"));
             lines.sorted().filter(x -> x.length() > 13).forEach(System.out::println);
             lines.close();
         }catch(IOException ioe) {
             System.out.println(ioe);
         }
+        System.out.println();
 
+        //9. Stream rows from text file and save to List
+        try{
+            List<String> lines2 = Files.lines(Paths.get("C:\\workspaces\\JavaByExamples\\src\\streams\\bands.txt"))
+                    .sorted().filter(x -> x.contains("US")).collect(Collectors.toList());
+            lines2.forEach(System.out::println);
+        }catch(IOException ioe) {
+            System.out.println(ioe);
+        }
+        System.out.println();
 
+        //10. Stream rows from CSV file and count the good rows
+        try{
+            Stream<String> lines = Files.lines(Paths.get("C:\\workspaces\\JavaByExamples\\src\\streams\\bands1.txt"));
+            int rowCount = (int)lines.map(x -> x.split(",")).filter(x -> x.length == 3).count();
+            System.out.println(rowCount + " good rows.");
+            lines.close();
+        }catch(IOException ioe) {
+            System.out.println(ioe);
+        }
+        System.out.println();
 
+        //11. Stream rows from CSV file and parse data from the good rows
+        try{
+            Stream<String> lines = Files.lines(Paths.get("C:\\workspaces\\JavaByExamples\\src\\streams\\bands1.txt"));
+            lines.map(x -> x.split(","))
+                    .filter(x -> x.length == 3)
+                    .filter(x -> Integer.parseInt(x[1]) > 15)
+                    .forEach(x -> System.out.println(x[0] + " " + x[1] + " " + x[2]));
+            lines.close();
+        }catch(IOException ioe) {
+            System.out.println(ioe);
+        }
+        System.out.println();
+
+        //12. Stream rows from CSV file and store fields in HashMap
+        try{
+            Stream<String> lines = Files.lines(Paths.get("C:\\workspaces\\JavaByExamples\\src\\streams\\bands1.txt"));
+            Map<String, Integer> map = new HashMap<>();
+            map = lines.map(x -> x.split(","))
+                    .filter(x -> x.length == 3)
+                    .filter(x -> Integer.parseInt(x[1]) > 15)
+                    .collect(Collectors.toMap(
+                            x->x[0],
+                            x->Integer.parseInt(x[1])));
+            for(String key: map.keySet()) {
+                System.out.println(key + " " + map.get(key));
+
+            }
+            lines.close();
+        }catch(IOException ioe) {
+            System.out.println(ioe);
+        }
+        System.out.println();
+
+        //13: reduction - sum
+        double total = Stream.of(7.3, 1.5, 4.8).reduce(0.0, (Double a, Double b) -> a + b);
+        System.out.println("Total = " + total);
+
+        //14. reduction - summary statistics
+        IntSummaryStatistics summary = IntStream.of(7,2,19,88,73,4,10)
+                .summaryStatistics();
+        System.out.println(summary);
+
+        JavaStream.minMaxSum(Stream.of(7, 69,2,221,8974).collect(Collectors.toList()));
+
+        System.out.println("The sum from 1 up to 10 is:" + JavaStream.sumAll(10));
     }
 
-//    public static void miniMaxSum(List<Integer> arr) {
-//        // Write your code here
-//        Integer[] orderedArr = Arrays.stream(arr.toArray(new Integer[arr.size()])).sorted().collect();
-//        int sum = Arrays.stream(orderedArr).sum();
-//    }
+    public static void minMaxSum(List<Integer> arr) {
+        List<Integer> sorted = arr.stream().sorted().collect(Collectors.toList());
+        int sum = sorted.stream().reduce(0, (Integer a, Integer b) -> a + b);
+        int minSum = sum - sorted.get(4);
+        int maxSum = sum - sorted.get(0);
+        System.out.println( minSum + " " + maxSum);
+    }
+
+    public static int sumAll(int num) {
+        return IntStream.range(1, num + 1).sum();
+    }
 }
