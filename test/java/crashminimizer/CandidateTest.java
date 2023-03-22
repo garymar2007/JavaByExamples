@@ -1,9 +1,8 @@
 package java.crashminimizer;
 
 import java.io.*;
-import java.nio.file.*;
 
-import main.java.crashminimizer.CrashMinimizer;
+import problemSolving.crashminimizer.CrashMinimizer;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

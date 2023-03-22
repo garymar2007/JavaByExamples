@@ -1,4 +1,4 @@
-package main.java.crashminimizer;
+package problemSolving.crashminimizer;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -99,7 +99,7 @@ public class CrashMinimizer {
     }
 
     public static void main(String args[]) throws Exception {
-        String programNameUnderTest = "main.java.crashminimizer.CaesarCipher";
+        String programNameUnderTest = "problemSolving.crashminimizer.CaesarCipher";
         String failingInputFilename = "C:\\workspaces\\JavaByExamples\\example_input\\inputFile03.txt";
         String expected = "Ω";
 

@@ -1,4 +1,4 @@
-package main.java.crashminimizer;
+package problemSolving.crashminimizer;
 
 
 import java.io.BufferedReader;
