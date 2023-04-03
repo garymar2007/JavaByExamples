@@ -1,6 +1,7 @@
 package dataStructure;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,6 +14,10 @@ import java.util.List;
  * Differences:
  * 1. For add/delete/insert method, LinkedList has more complexity than ArrayList
  * 2. More static data, meaning not change a lot - using linkedlist
+ *
+ * Array
+ * 1. fixed size, lacking elastic sizing - can't do add a new element/remove an old element
+ * 2. printing is not convenient
  */
 public class LinkedListArrayList {
     public static void main(String... args) {
@@ -37,5 +42,21 @@ public class LinkedListArrayList {
 
         aArrayList.remove(1);
         aArrayList.add(2, "Nathan");
+
+        //Initialization is different between Array and ArrayList
+        String[] friends = {"Gary", "Carol", "Leo", "Jerry"};
+        List<String> friendsList = new ArrayList<>(Arrays.asList(friends));
+
+        //size() in ArrayList or length attribute in Array
+        System.out.println(friends.length);
+        System.out.println(friendsList.size());
+
+        //Set element to change element
+        friends[0] = "Carl";
+        friendsList.set(0, "Carl");
+
+        //Print each element - array won't show each element, but only the address of the object
+        System.out.println(friends); //[Ljava.lang.Object;@7a0ac6e3
+        System.out.println(friendsList);
     }
 }

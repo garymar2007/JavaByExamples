@@ -115,6 +115,8 @@ public class JavaStream {
         JavaStream.minMaxSum(Stream.of(7, 69,2,221,8974).collect(Collectors.toList()));
 
         System.out.println("The sum from 1 up to 10 is:" + JavaStream.sumAll(10));
+
+        testMaxValue();
     }
 
     public static void minMaxSum(List<Integer> arr) {
@@ -127,5 +129,10 @@ public class JavaStream {
 
     public static int sumAll(int num) {
         return IntStream.range(1, num + 1).sum();
+    }
+
+    public static void testMaxValue() {
+        List<Integer> maxNums = Stream.of(3,2,1,3).max(Comparator.comparing(Integer::valueOf)).stream().collect(Collectors.toList());
+        System.out.println("The number of max number is " + maxNums.size());
     }
 }
