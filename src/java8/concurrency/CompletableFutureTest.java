@@ -1,4 +1,4 @@
-package ThreadManipulateTest;
+package java8.concurrency;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
