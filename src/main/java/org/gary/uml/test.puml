@@ -1,0 +1,22 @@
+@startuml
+!pragma layout smetana
+
+class Car {
+    - String name;
+    - String make;
+    - String model;
+    - String vin;
+    + String getName();
+    + setName(String name);
+    + String getMake();
+    + setMake(String make);
+    + String getModel();
+    + setModel(String Model);
+    + String getVin();
+    + setVin(String vin);
+}
+
+Driver - Car : drives >
+Car *- Wheel : have 4 >
+Car -- Person : < owns
+@enduml
