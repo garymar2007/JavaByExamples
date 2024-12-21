@@ -1,5 +1,9 @@
 package org.gary.solid.leskovsubstitution;
 
+/**
+ * This is to demonstrate the Liskov Substitution Principle
+ *
+ */
 public abstract class SocialMedia {
 
     //@Support WhatsApp, Facebook, Instagram
