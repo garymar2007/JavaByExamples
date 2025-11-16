@@ -57,3 +57,45 @@ Test the API: http://localhost:8080/todos/NEW
 You should see the trace in the Jaeger UI:
 ![img.png](img.png)
 
+## Code-based Instrumentation for Java & Python
+    docker run -d --name jaeger \
+      -e COLLECTOR_OTLP_ENABLED=true \
+      -p 16686:16686 \
+      -p 14268:14268 \
+      -p 4317:4317 \
+      -p 4318:4318 \
+      jaegertracing/all-in-one
+Download the agent JAR file, if it is not there yet.
+
+    wget https:‌//github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v2.8.0/opentelemetry-javaagent.jar
+
+    export OTEL_TRACES_EXPORTER=otlp
+    export OTEL_METRICS_EXPORTER=none
+    export OTEL_LOGS_EXPORTER=none
+
+In order to make someInternalMethod observable, we need to add an annotation to this method in the code.
+ 
+Within the source code of the Java class TodobackendApplication.java add the following import statements to the top.
+
+    import io.opentelemetry.instrumentation.annotations.SpanAttribute;
+    import io.opentelemetry.instrumentation.annotations.WithSpan;
+
+    @WithSpan
+    String someInternalMethod(String todo)
+
+    java -javaagent:./opentelemetry-javaagent.jar -jar target/todobackend-0.0.1-SNAPSHOT.jar
+
+    curl -X POST localhost:8080/todos/TEST
+    curl localhost:8080/todos/
+    curl -X DELETE localhost:8080/todos/TEST
+
+![img_1.png](img_1.png)
+
+You will be able to see the otel.scope.name and its version.
+
+@WithSpan
+String someInternalMethod(@SpanAttribute String todo)
+![img_2.png](img_2.png)
+
+You will be able to see the parameter being passed into the method.
+
